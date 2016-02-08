@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Randicons</title>
+    <style media="screen">
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #container {
+        padding: 24px;
+        background-color: #eee;
+      }
+
+      #randicon {
+        width: 240px;
+        height: 240px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="randicon"></div>
+    </div>
+    <script type="text/javascript">
+      function generateMatrix(size) {
+        var matrix = [];
+
+        for (var i = 0; i < Math.ceil(size * 0.5); i++) {
+          var column = [];
+          for (var j = 0; j < size; j++) {
+            column.push(Math.random() < 0.5);
+          }
+          matrix.push(column);
+        }
+
+        for (var i = Math.ceil(size * 0.5); i < size; i++) {
+          var column = matrix[size - i - 1];
+          matrix.push(column);
+        }
+
+        return matrix;
+      }
+
+      function generateColorHex() {
+        var color = Math.floor(Math.random() * 16777216).toString(16);
+        return `000000${color}`.substr(-6);
+      }
+
+      function generatePixel(relativeSize, colorHex) {
+        var pixel = document.createElement('div');
+        pixel.style.width = `${relativeSize}%`;
+        pixel.style.height = `${relativeSize}%`;
+        pixel.style.backgroundColor = `#${colorHex}`;
+        return pixel;
+      }
+
+      var size = 5;
+      var matrix = generateMatrix(size);
+      var pixelColorHex = generateColorHex();
+      var pixelRelativeSize = 100 / size;
+
+      var randicon = document.getElementById('randicon');
+      for (var column of matrix) {
+        for (var pixelValue of column) {
+          randicon.appendChild(generatePixel(pixelRelativeSize, pixelValue && pixelColorHex));
+        }
+      }
+    </script>
+  </body>
+</html>
