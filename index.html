@@ -34,6 +34,7 @@
   <body>
     <div id="container"></div>
     <form onsubmit="onFormSubmit(event)">
+      <input type="number" name="size" value="5" min="2" max="10">
       <button type="submit">Generate</button>
     </form>
     <script type="text/javascript">
@@ -102,6 +103,9 @@
 
       function onFormSubmit(event) {
         event.preventDefault();
+
+        var size = parseInt(document.getElementsByName('size')[0].value);
+
         showNewIdenticon(size);
       }
 

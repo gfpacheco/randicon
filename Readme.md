@@ -7,5 +7,5 @@ Check [Randicon demo page](http://gfpacheco.github.io/randicon) and happy refres
 ### TODO
 
 - [x] Add a generate button for faster refreshing
-- [ ] Add a number input for changing the identicon size
+- [x] Add a number input for changing the identicon size
 - [ ] Add a "Download as PNG" button (may be needed to use canvas instead of flexbox)
