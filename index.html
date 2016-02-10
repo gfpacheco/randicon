@@ -20,7 +20,7 @@
         background-color: #eee;
       }
 
-      #randicon {
+      .randicon {
         width: 240px;
         height: 240px;
         display: flex;
@@ -30,10 +30,11 @@
     </style>
   </head>
   <body>
-    <div id="container">
-      <div id="randicon"></div>
-    </div>
+    <div id="container"></div>
     <script type="text/javascript">
+      var size = 5;
+      var container = document.getElementById('container');
+
       function generateMatrix(size) {
         var matrix = [];
 
@@ -66,17 +67,28 @@
         return pixel;
       }
 
-      var size = 5;
-      var matrix = generateMatrix(size);
-      var pixelColorHex = generateColorHex();
-      var pixelRelativeSize = 100 / size;
+      function generateIdenticon(size) {
+        var randicon = document.createElement('div');
+        randicon.className = 'randicon';
 
-      var randicon = document.getElementById('randicon');
-      for (var column of matrix) {
-        for (var pixelValue of column) {
-          randicon.appendChild(generatePixel(pixelRelativeSize, pixelValue && pixelColorHex));
+        var matrix = generateMatrix(size);
+        var pixelColorHex = generateColorHex();
+        var pixelRelativeSize = 100 / size;
+
+        for (var column of matrix) {
+          for (var pixelValue of column) {
+            randicon.appendChild(generatePixel(pixelRelativeSize, pixelValue && pixelColorHex));
+          }
         }
+
+        return randicon;
       }
+
+      function showNewIdenticon(size) {
+        container.appendChild(generateIdenticon(size));
+      }
+
+      showNewIdenticon(size);
     </script>
   </body>
 </html>
